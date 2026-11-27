@@ -6,12 +6,18 @@ import 'package:tendryn/core/role/role_controller.dart';
 import 'package:tendryn/core/constants/app_config.dart';
 import 'package:tendryn/services/api_service.dart';
 import 'package:tendryn/services/app_service.dart';
+import 'package:tendryn/services/appointments_service.dart';
 import 'package:tendryn/services/auth_service.dart';
+import 'package:tendryn/services/billing_service.dart';
 import 'package:tendryn/services/connectivity_service.dart';
+import 'package:tendryn/services/consultation_service.dart';
 import 'package:tendryn/services/dashboard_service.dart';
+import 'package:tendryn/services/lab_service.dart';
 import 'package:tendryn/services/leave_service.dart';
+import 'package:tendryn/services/patient_service.dart';
 import 'package:tendryn/services/queue_service.dart';
 import 'package:tendryn/services/storage_service.dart';
+import 'package:tendryn/services/vitals_service.dart';
 
 /// Registers every app-wide dependency once, in dependency order.
 /// Pass a [StorageManager] to substitute storage (tests).
@@ -50,5 +56,11 @@ class InitialBinding extends Bindings {
     Get.lazyPut(() => DashboardService(api: Get.find<ApiService>()), fenix: true);
     Get.lazyPut(() => QueueService(api: Get.find<ApiService>()), fenix: true);
     Get.lazyPut(() => LeaveService(client: Get.find<ApiService>().client), fenix: true);
+    Get.lazyPut(() => PatientService(api: Get.find<ApiService>()), fenix: true);
+    Get.lazyPut(() => AppointmentsService(api: Get.find<ApiService>()), fenix: true);
+    Get.lazyPut(() => BillingService(api: Get.find<ApiService>()), fenix: true);
+    Get.lazyPut(() => ConsultationService(api: Get.find<ApiService>()), fenix: true);
+    Get.lazyPut(() => VitalsService(api: Get.find<ApiService>()), fenix: true);
+    Get.lazyPut(() => LabService(api: Get.find<ApiService>()), fenix: true);
   }
 }

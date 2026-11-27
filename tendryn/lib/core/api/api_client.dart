@@ -19,6 +19,9 @@ class ApiClient {
   Future<ApiResponse<T>> put<T>(String path, {Object? body, required JsonParser<T> parse}) =>
       _send(() => _dio.put<dynamic>(path, data: body), parse);
 
+  Future<ApiResponse<T>> patch<T>(String path, {Object? body, required JsonParser<T> parse}) =>
+      _send(() => _dio.patch<dynamic>(path, data: body), parse);
+
   Future<ApiResponse<T>> _send<T>(Future<Response<dynamic>> Function() call, JsonParser<T> parse) async {
     try {
       final response = await call();

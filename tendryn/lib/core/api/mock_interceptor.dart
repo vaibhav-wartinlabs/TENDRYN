@@ -45,8 +45,45 @@ class MockInterceptor extends Interceptor {
           'reason': body['reason'],
         });
       default:
-        return _fail(options, handler, 404, 'No mock for ${options.method} ${options.path}');
+        return _extra(options, handler);
     }
+  }
+
+  /// Minimal mocks for the newer screens so they render offline (USE_MOCK_API=true).
+  /// For real data, run with USE_MOCK_API=false against the backend.
+  void _extra(RequestOptions options, RequestInterceptorHandler handler) {
+    final method = options.method;
+    final path = options.path;
+    bool get(String p) => method == 'GET' && (path == p || path.endsWith(p));
+    bool post(String p) => method == 'POST' && (path == p || path.endsWith(p));
+
+    if (get('/patients/stats')) {
+      return _ok(options, handler, {'total': 0, 'recently_seen': 0, 'in_queue': 0, 'recently_added': 0});
+    }
+    if (get('/patients/search')) return _ok(options, handler, <dynamic>[]);
+    if (get('/billing/summary')) {
+      return _ok(options, handler,
+          {'to_collect': 0.0, 'to_collect_count': 0, 'paid_today': 0.0, 'paid_today_count': 0, 'cash_up_status': 'Not started'});
+    }
+    if (get('/invoices')) return _ok(options, handler, <dynamic>[]);
+    if (get('/appointments')) return _ok(options, handler, <dynamic>[]);
+    if (get('/consultations')) return _ok(options, handler, {'items': <dynamic>[], 'total': 0});
+    if (get('/lab/referrals')) return _ok(options, handler, {'referrals': <dynamic>[], 'total_count': 0});
+    if (get('/lab/results')) return _ok(options, handler, {'results': <dynamic>[], 'total_count': 0});
+    if (get('/vitals')) return _ok(options, handler, <dynamic>[]);
+    if (post('/patients')) {
+      final body = options.data as Map<String, dynamic>? ?? {};
+      return _ok(options, handler, {
+        'patient': {
+          'id': 'mock-${DateTime.now().millisecondsSinceEpoch}',
+          'first_name': body['first_name'] ?? 'New',
+          'last_name': body['last_name'] ?? 'Patient',
+          'file_number': null,
+        },
+        'possible_duplicates': <dynamic>[],
+      });
+    }
+    return _fail(options, handler, 404, 'No mock for $method $path');
   }
 
   void _ok(RequestOptions o, RequestInterceptorHandler h, Object data) =>
