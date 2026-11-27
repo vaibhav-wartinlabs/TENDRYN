@@ -1,0 +1,15 @@
+--- test/patient_quick_view_test.dart
++++ test/patient_quick_view_test.dart
+@@ -14,14 +14,14 @@
+-import 'package:tendryn/core/authentication/auth_model.dart';
++import 'package:tendryn/models/user.dart';
+ import 'package:tendryn/services/connectivity_service.dart';
+ 
+ class _FakeAuthController extends GetxController implements AuthController {
+   @override
+   bool get isAuthenticated => true;
+   @override
+-  AuthUser? get user => const AuthUser(id: '1', name: 'Lerato Mokoena', email: 'lerato@example.com', role: AuthRole.receptionist, jobTitle: 'Reception', clinicName: 'Ubuntu Family Clinic');
++  User? get user => const User(id: '1', name: 'Lerato Mokoena', email: 'lerato@example.com', role: UserRole.member, jobTitle: 'Reception', clinicName: 'Ubuntu Family Clinic');
+   @override
+   Future<void> logout() async {}

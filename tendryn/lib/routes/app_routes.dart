@@ -1,0 +1,41 @@
+/// Route paths. The only place path strings are written.
+abstract class AppRoutes {
+  static const splash = '/splash';
+  static const login = '/login';
+  static const dashboard = '/dashboard';
+  static const patientQuickView = '/patient-quick-view';
+  static const patientSearchPreview = '/patient-search-preview';
+  static const queue = '/queue';
+  static const addWalkIn = '/add-walk-in';
+  static const patients = '/patients';
+  static const patientDetails = '/patient-details';
+  static const patientEdit = '/patient-edit';
+  static const registerPatient = '/register-patient';
+  static const appointments = '/appointments';
+  static const appointmentDetails = '/appointment-details';
+  static const doctorAppointmentDetails = '/doctor-appointment-details';
+  static const doctorLeaveRequest = '/doctor-leave-request';
+  static const bookAppointment = '/book-appointment';
+  static const appointmentConflicts = '/appointment-conflicts';
+  static const manageAvailability = '/manage-availability';
+  static const appointmentDetail = '/appointment-detail';
+  static const editAvailability = '/edit-availability';
+  static const rescheduleAppointment = '/reschedule-appointment';
+  static const billing = '/billing';
+  static const invoiceDetails = '/invoice-details';
+  static const consultations = '/consultations';
+  static const consultationWorkspace = '/consultation-workspace';
+  static const labResults = '/lab-results';
+  static const labResultDetails = '/lab-result-details';
+  static const vitalsTriage = '/vitals-triage';
+  static const recordVitalsTriage = '/record-vitals-triage';
+  static const nursePatientProfile = '/nurse-patient-profile';
+  static const nurseTriageDetail = '/nurse-triage-detail';
+  static const nurseConsultations = '/nurse-consultations';
+  static const nursePrescriptions = '/nurse-prescriptions';
+  static const nurseLabReferral = '/nurse-lab-referral';
+  static const nurseRecordSample = '/nurse-record-sample';
+  static const labReferral = '/lab-referral';
+  static const labReferralDetails = '/lab-referral-details';
+  static const patientLabInfo = '/patient-lab-info';
+}
